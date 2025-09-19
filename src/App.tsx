@@ -1,11 +1,14 @@
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import './App.css'
 import { decrement, increment } from './state/feature/Counter/CounterSlice'
+import type { RootState } from './state/store'
+import { useAppDispatch, useAppSelector } from './state/hook'
 
 function App() {
 
-  const disPatch : any=useDispatch()
+  const disPatch : any=useAppDispatch()
+  const {count}= useAppSelector((state : RootState)=> state.counter)
   const handleIncrement=()=>
   {
     disPatch(increment())
@@ -18,7 +21,7 @@ function App() {
   return (
     <>
       <button onClick={handleIncrement}>Increament</button>
-      <div>0</div>
+      <div>{count}</div>
       <button onClick={handleDecrement}>Decreament</button>
     </>
   )
